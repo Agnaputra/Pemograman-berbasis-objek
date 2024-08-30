@@ -27,4 +27,6 @@ public class Sepeda {
         System.out.println("Kecepatan: " + kecepatan);
         System.out.println("Gear: " + gear);
     }
+    
+
 }
