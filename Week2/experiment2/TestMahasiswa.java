@@ -1,4 +1,4 @@
-package Week2;
+package Week2.experiment2;
 
 public class TestMahasiswa {
     public static void main(String[] args) {
