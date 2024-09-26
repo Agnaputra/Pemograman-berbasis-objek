@@ -1,6 +1,6 @@
 import java.util.*;
 
-abstract class User {
+class User {
     private String username;
     private String password;
 
@@ -17,7 +17,9 @@ abstract class User {
         return password;
     }
 
-    public abstract void tampilkanMenu();
+    public void tampilkanMenu() {
+        // Placeholder for specific user menus
+    }
 }
 
 class Instruktur extends User {
@@ -28,7 +30,7 @@ class Instruktur extends User {
     @Override
     public void tampilkanMenu() {
         System.out.println("\n=== Menu Instruktur ===");
-        System.out.println("1. Tambah Konten ke Kursus");
+        System.out.println("1. Tambah Konten");
         System.out.println("2. Lihat Daftar Konten");
         System.out.println("3. Logout");
         System.out.print("Pilih menu: ");
@@ -42,21 +44,21 @@ class Peserta extends User {
         super(username, password);
     }
 
+    @Override
+    public void tampilkanMenu() {
+        System.out.println("\n=== Menu Peserta ===");
+        System.out.println("1. Daftar Kursus");
+        System.out.println("2. Lihat Kursus yang Dibeli");
+        System.out.println("3. Logout");
+        System.out.print("Pilih menu: ");
+    }
+
     public void beliKursus(Kursus kursus) {
         kursusYangDibeli.add(kursus);
     }
 
     public List<Kursus> getKursusYangDibeli() {
         return kursusYangDibeli;
-    }
-
-    @Override
-    public void tampilkanMenu() {
-        System.out.println("\n=== Menu Peserta ===");
-        System.out.println("1. Daftar Kursus");
-        System.out.println("2. Lihat Kursus yang Telah Dibeli");
-        System.out.println("3. Logout");
-        System.out.print("Pilih menu: ");
     }
 }
 
@@ -72,9 +74,43 @@ class Admin extends User {
         System.out.println("2. Lihat Daftar Instruktur");
         System.out.println("3. Lihat Daftar Peserta");
         System.out.println("4. Lihat Daftar Kursus");
-        System.out.println("5. Lihat Rincian Transaksi Pembayaran");
+        System.out.println("5. Lihat Rincian Transaksi");
         System.out.println("6. Logout");
         System.out.print("Pilih menu: ");
+    }
+}
+
+class Kursus {
+    private String namaKursus;
+    private double harga;
+    private List<Konten> daftarKonten = new ArrayList<>();
+
+    public Kursus(String namaKursus, double harga) {
+        this.namaKursus = namaKursus;
+        this.harga = harga;
+    }
+
+    public String getNamaKursus() {
+        return namaKursus;
+    }
+
+    public double getHarga() {
+        return harga;
+    }
+
+    public void tambahKonten(Konten konten) {
+        daftarKonten.add(konten);
+    }
+
+    public void tampilkanDaftarKonten() {
+        if (daftarKonten.isEmpty()) {
+            System.out.println("Belum ada konten untuk kursus ini.");
+        } else {
+            System.out.println("\nDaftar Konten:");
+            for (int i = 0; i < daftarKonten.size(); i++) {
+                System.out.println((i + 1) + ". " + daftarKonten.get(i).getJudul());
+            }
+        }
     }
 }
 
@@ -94,67 +130,23 @@ class Konten {
     public String getDeskripsi() {
         return deskripsi;
     }
-
-    @Override
-    public String toString() {
-        return "Judul: " + judul + ", Deskripsi: " + deskripsi;
-    }
-}
-
-class Kursus {
-    private String namaKursus;
-    private double harga;
-    private List<Konten> kontenList = new ArrayList<>();
-
-    public Kursus(String namaKursus, double harga) {
-        this.namaKursus = namaKursus;
-        this.harga = harga;
-    }
-
-    public String getNamaKursus() {
-        return namaKursus;
-    }
-
-    public double getHarga() {
-        return harga;
-    }
-
-    public void tambahKonten(Konten konten) {
-        kontenList.add(konten);
-    }
-
-    public List<Konten> getKontenList() {
-        return kontenList;
-    }
-
-    public void tampilkanDaftarKonten() {
-        System.out.println("Daftar Konten untuk Kursus " + namaKursus + ":");
-        if (kontenList.isEmpty()) {
-            System.out.println("Belum ada konten.");
-        } else {
-            for (Konten konten : kontenList) {
-                System.out.println("- " + konten);
-            }
-        }
-    }
 }
 
 class Pembayaran {
     private String idPembayaran;
     private double jumlah;
     private String metodePembayaran;
-    private String tanggal;
 
-    public Pembayaran(String idPembayaran, double jumlah, String metodePembayaran, String tanggal) {
+    public Pembayaran(String idPembayaran, double jumlah, String metodePembayaran) {
         this.idPembayaran = idPembayaran;
         this.jumlah = jumlah;
         this.metodePembayaran = metodePembayaran;
-        this.tanggal = tanggal;
     }
 
     public void tampilkanDetailPembayaran() {
-        System.out.println("ID Pembayaran: " + idPembayaran + ", Jumlah: " + jumlah + ", Metode: " + metodePembayaran
-                + ", Tanggal: " + tanggal);
+        System.out.println("ID Pembayaran: " + idPembayaran);
+        System.out.println("Jumlah: " + jumlah);
+        System.out.println("Metode Pembayaran: " + metodePembayaran);
     }
 }
 
@@ -166,8 +158,8 @@ public class EduTechPlatform {
 
     public static void main(String[] args) {
         // Inisialisasi Data
-        daftarUser.add(new Instruktur("instruktur1", "password1"));
-        daftarUser.add(new Instruktur("instruktur2", "password2"));
+        daftarUser.add(new Instruktur("instruktur1", "i1"));
+        daftarUser.add(new Instruktur("instruktur2", "i2"));
         daftarUser.add(new Admin("admin", "admin123"));
         daftarKursus.add(new Kursus("Kursus Java Basic-Advance", 500000));
         daftarKursus.add(new Kursus("Kursus Web Development Basic-Advance", 600000));
@@ -181,7 +173,7 @@ public class EduTechPlatform {
             System.out.println("2. Daftar Akun Peserta");
             System.out.println("3. Exit");
             System.out.print("Pilih menu: ");
-            int mainMenu = getValidIntInput();
+            int mainMenu = scanner.nextInt();
 
             switch (mainMenu) {
                 case 1:
@@ -240,7 +232,7 @@ public class EduTechPlatform {
     private static void instrukturMenu(Instruktur instruktur) {
         while (true) {
             instruktur.tampilkanMenu();
-            int menu = getValidIntInput();
+            int menu = scanner.nextInt();
 
             switch (menu) {
                 case 1:
@@ -264,7 +256,7 @@ public class EduTechPlatform {
             System.out.println((i + 1) + ". " + daftarKursus.get(i).getNamaKursus());
         }
         System.out.print("Pilih kursus (nomor): ");
-        int kursusIndex = getValidIntInput() - 1;
+        int kursusIndex = scanner.nextInt() - 1;
         if (kursusIndex >= 0 && kursusIndex < daftarKursus.size()) {
             scanner.nextLine(); // Konsumsi newline
             System.out.print("Masukkan judul konten: ");
@@ -286,7 +278,7 @@ public class EduTechPlatform {
             System.out.println((i + 1) + ". " + daftarKursus.get(i).getNamaKursus());
         }
         System.out.print("Pilih kursus (nomor): ");
-        int kursusIndex = getValidIntInput() - 1;
+        int kursusIndex = scanner.nextInt() - 1;
         if (kursusIndex >= 0 && kursusIndex < daftarKursus.size()) {
             daftarKursus.get(kursusIndex).tampilkanDaftarKonten();
         } else {
@@ -294,10 +286,74 @@ public class EduTechPlatform {
         }
     }
 
+    private static void pesertaMenu(Peserta peserta) {
+        while (true) {
+            peserta.tampilkanMenu();
+            int menu = scanner.nextInt();
+
+            switch (menu) {
+                case 1:
+                    daftarKursus(peserta);
+                    break;
+                case 2:
+                    lihatKursusYangDibeli(peserta);
+                    break;
+                case 3:
+                    return; // Logout
+                default:
+                    System.out.println("Pilihan tidak valid.");
+            }
+        }
+    }
+
+    private static void daftarKursus(Peserta peserta) {
+        System.out.println("\n=== Daftar Kursus ===");
+        for (int i = 0; i < daftarKursus.size(); i++) {
+            System.out.println((i + 1) + ". " + daftarKursus.get(i).getNamaKursus() + " - Harga: "
+                    + daftarKursus.get(i).getHarga());
+        }
+        System.out.print("Pilih kursus (nomor): ");
+        int kursusIndex = scanner.nextInt() - 1;
+        if (kursusIndex >= 0 && kursusIndex < daftarKursus.size()) {
+            Kursus kursus = daftarKursus.get(kursusIndex);
+            System.out.print("Pilih metode pembayaran (1. Transfer, 2. Indomaret): ");
+            int metode = scanner.nextInt();
+            String metodePembayaran = metode == 1 ? "Transfer" : "Indomaret";
+            // Generate ID pembayaran otomatis
+            String idPembayaran = "P" + (daftarPembayaran.size() + 1);
+            Pembayaran pembayaran = new Pembayaran(idPembayaran, kursus.getHarga(), metodePembayaran);
+            daftarPembayaran.add(pembayaran);
+            peserta.beliKursus(kursus);
+            System.out.println("Pembayaran berhasil. Anda telah membeli kursus " + kursus.getNamaKursus());
+            System.out.println("ID Pembayaran: " + idPembayaran);
+        } else {
+            System.out.println("Kursus tidak valid.");
+        }
+    }
+
+    private static void lihatKursusYangDibeli(Peserta peserta) {
+        System.out.println("\n=== Kursus yang Telah Dibeli ===");
+        List<Kursus> kursusYangDibeli = peserta.getKursusYangDibeli();
+        if (kursusYangDibeli.isEmpty()) {
+            System.out.println("Anda belum membeli kursus apapun.");
+        } else {
+            for (int i = 0; i < kursusYangDibeli.size(); i++) {
+                System.out.println((i + 1) + ". " + kursusYangDibeli.get(i).getNamaKursus());
+            }
+            System.out.print("Pilih kursus (nomor) untuk melihat daftar konten: ");
+            int kursusIndex = scanner.nextInt() - 1;
+            if (kursusIndex >= 0 && kursusIndex < kursusYangDibeli.size()) {
+                kursusYangDibeli.get(kursusIndex).tampilkanDaftarKonten();
+            } else {
+                System.out.println("Kursus tidak valid.");
+            }
+        }
+    }
+
     private static void adminMenu(Admin admin) {
         while (true) {
             admin.tampilkanMenu();
-            int menu = getValidIntInput();
+            int menu = scanner.nextInt();
 
             switch (menu) {
                 case 1:
@@ -313,7 +369,7 @@ public class EduTechPlatform {
                     lihatDaftarKursus();
                     break;
                 case 5:
-                    lihatRincianPembayaran();
+                    lihatRincianTransaksi();
                     break;
                 case 6:
                     return; // Logout
@@ -329,9 +385,8 @@ public class EduTechPlatform {
         String namaKursus = scanner.nextLine();
         System.out.print("Masukkan harga kursus: ");
         double harga = scanner.nextDouble();
-        Kursus kursus = new Kursus(namaKursus, harga);
-        daftarKursus.add(kursus);
-        System.out.println("Kursus berhasil ditambahkan!");
+        daftarKursus.add(new Kursus(namaKursus, harga));
+        System.out.println("Kursus berhasil ditambahkan.");
     }
 
     private static void lihatDaftarInstruktur() {
@@ -359,71 +414,10 @@ public class EduTechPlatform {
         }
     }
 
-    private static void lihatRincianPembayaran() {
-        System.out.println("\n=== Rincian Pembayaran ===");
+    private static void lihatRincianTransaksi() {
+        System.out.println("\n=== Rincian Transaksi Pembayaran ===");
         for (Pembayaran pembayaran : daftarPembayaran) {
             pembayaran.tampilkanDetailPembayaran();
-        }
-    }
-
-    private static void pesertaMenu(Peserta peserta) {
-        while (true) {
-            peserta.tampilkanMenu();
-            int menu = getValidIntInput();
-
-            switch (menu) {
-                case 1:
-                    daftarKursusPeserta();
-                    break;
-                case 2:
-                    lihatKursusDibeli(peserta);
-                    break;
-                case 3:
-                    return; // Logout
-                default:
-                    System.out.println("Pilihan tidak valid.");
-            }
-        }
-    }
-
-    private static void daftarKursusPeserta() {
-        System.out.println("\n=== Daftar Kursus ===");
-        for (int i = 0; i < daftarKursus.size(); i++) {
-            System.out.println((i + 1) + ". " + daftarKursus.get(i).getNamaKursus() + " - Harga: " + daftarKursus.get(i).getHarga());
-        }
-        System.out.print("Pilih kursus untuk membeli (nomor): ");
-        int kursusIndex = getValidIntInput() - 1;
-        if (kursusIndex >= 0 && kursusIndex < daftarKursus.size()) {
-            Kursus kursus = daftarKursus.get(kursusIndex);
-            System.out.println("Anda telah membeli kursus " + kursus.getNamaKursus());
-            // Simulasi pembelian
-            // peserta.beliKursus(kursus);
-            // Simpan rincian pembayaran (dummy data)
-            daftarPembayaran.add(new Pembayaran(UUID.randomUUID().toString(), kursus.getHarga(), "Transfer Bank", new Date().toString()));
-        } else {
-            System.out.println("Kursus tidak valid.");
-        }
-    }
-
-    private static void lihatKursusDibeli(Peserta peserta) {
-        System.out.println("\n=== Kursus yang Telah Dibeli ===");
-        List<Kursus> kursusDibeli = peserta.getKursusYangDibeli();
-        if (kursusDibeli.isEmpty()) {
-            System.out.println("Anda belum membeli kursus apapun.");
-        } else {
-            for (Kursus kursus : kursusDibeli) {
-                System.out.println(kursus.getNamaKursus());
-            }
-        }
-    }
-
-    private static int getValidIntInput() {
-        while (true) {
-            try {
-                return Integer.parseInt(scanner.next());
-            } catch (NumberFormatException e) {
-                System.out.println("Input tidak valid. Silakan masukkan angka.");
-            }
         }
     }
 }
