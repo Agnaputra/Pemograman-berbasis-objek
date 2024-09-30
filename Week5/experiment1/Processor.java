@@ -1,4 +1,4 @@
-package Week5;
+package Week5.experiment1;
 
 public class Processor {
     private String brand;

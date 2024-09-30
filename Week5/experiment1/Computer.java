@@ -1,4 +1,4 @@
-package Week5;
+package Week5.experiment1;
 
 public class Computer {
     private String brand;
