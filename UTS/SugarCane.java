@@ -8,6 +8,6 @@ public class SugarCane extends Crop {
 
     @Override
     public void grow() {
-        System.out.println("Sugar Cane is growing. It will take " + harvestTime + " days to be ready.");
+        System.out.println("Sugar Cane is growing.");
     }
 }

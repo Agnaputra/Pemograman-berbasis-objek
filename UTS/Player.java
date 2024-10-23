@@ -23,6 +23,26 @@ public class Player {
             System.out.println("Player is too tired to work.");
         }
     }
+
+    public boolean canAfford(int amount) {
+        return money >= amount;
+    }
+
+    public void spendMoney(int amount) {
+        if (canAfford(amount)) {
+            money -= amount;
+            System.out.println("You spent $" + amount + ". Remaining money: $" + money);
+        } else {
+            System.out.println("Not enough money.");
+        }
+    }
+
+    public void addMoney(int amount) {
+        money += amount;
+        System.out.println("You earned $" + amount + ". Current balance: $" + money);
+    }
+
+    public void showBalance() {
+        System.out.println("Your current balance is: $" + money);
+    }
 }
-
-

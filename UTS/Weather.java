@@ -1,7 +1,7 @@
 package UTS;
 
 // Weather class
-class Weather {
+public class Weather {
     String condition;
 
     public void changeWeather(String condition) {

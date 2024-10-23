@@ -8,6 +8,6 @@ public class Onion extends Crop {
 
     @Override
     public void grow() {
-        System.out.println("Onion is growing. It will take " + harvestTime + " days to be ready.");
+        System.out.println("Onion is growing.");
     }
 }
