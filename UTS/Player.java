@@ -1,26 +1,27 @@
 package UTS;
 
-// Player class
-public class Player {
+class Player {
+    String name;
     int money;
     int energy;
 
-    public Player(int money, int energy) {
+    public Player(String name, int money, int energy) {
+        this.name = name;
         this.money = money;
         this.energy = energy;
     }
 
     public void rest() {
         energy += 10;
-        System.out.println("Player has rested and gained energy. Current energy: " + energy);
+        System.out.println(name + " has rested and gained energy. Current energy: " + energy);
     }
 
     public void work() {
         if (energy > 0) {
             energy -= 5;
-            System.out.println("Player worked. Energy decreased. Current energy: " + energy);
+            System.out.println(name + " worked. Energy decreased. Current energy: " + energy);
         } else {
-            System.out.println("Player is too tired to work.");
+            System.out.println(name + " is too tired to work.");
         }
     }
 
@@ -31,7 +32,7 @@ public class Player {
     public void spendMoney(int amount) {
         if (canAfford(amount)) {
             money -= amount;
-            System.out.println("You spent $" + amount + ". Remaining money: $" + money);
+            System.out.println(name + " spent $" + amount + ". Remaining money: $" + money);
         } else {
             System.out.println("Not enough money.");
         }
@@ -39,10 +40,10 @@ public class Player {
 
     public void addMoney(int amount) {
         money += amount;
-        System.out.println("You earned $" + amount + ". Current balance: $" + money);
+        System.out.println(name + " earned $" + amount + ". Current balance: $" + money);
     }
 
     public void showBalance() {
-        System.out.println("Your current balance is: $" + money);
+        System.out.println(name + "'s current balance is: $" + money);
     }
 }

@@ -1,9 +1,8 @@
 package UTS;
 
-// SugarCane class inherits from Crop
-public class SugarCane extends Crop {
+class SugarCane extends Crop {
     public SugarCane() {
-        super("Sugar Cane", 4, 12); // Sugar Cane needs 4 units of water and 12 days to harvest
+        super("Sugar Cane", 4, 12);
     }
 
     @Override

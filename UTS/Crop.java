@@ -3,11 +3,11 @@ package UTS;
 // Crop Parent Class
 abstract class Crop {
     String name;
-    int waterNeeds; // Water requirement
-    int harvestTime; // Time to harvest in days
+    int waterNeeds;
+    int harvestTime;
     boolean isSick;
     boolean isHarvested;
-    int growthStage; // Tracks the growth of the crop
+    int growthStage;
 
     public Crop(String name, int waterNeeds, int harvestTime) {
         this.name = name;
@@ -15,10 +15,10 @@ abstract class Crop {
         this.harvestTime = harvestTime;
         this.isSick = false;
         this.isHarvested = false;
-        this.growthStage = 0; // Start with growth stage 0
+        this.growthStage = 0;
     }
 
-    public abstract void grow(); // Abstract method to be implemented by subclasses
+    public abstract void grow();
 
     public void water() {
         System.out.println(name + " has been watered.");

@@ -1,7 +1,6 @@
 package UTS;
 
-// Store class
-public class Store {
+class Store {
     public void sellItem(String item, int price) {
         System.out.println("Selling " + item + " for $" + price);
     }
@@ -10,4 +9,3 @@ public class Store {
         System.out.println("Buying " + item + " for $" + price);
     }
 }
-
