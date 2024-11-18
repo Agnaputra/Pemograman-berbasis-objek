@@ -13,6 +13,6 @@ public class Tester3 {
         Payable[] p = {pEmp, eBill};  // Only includes Payable objects (pEmp and eBill)
 
         // The following line would cause an error, as eBill is not an Employee:
-        Employee[] e2 = {pEmp, iEmp, eBill}; // ERROR: eBill is not an Employee
+        Employee[] e2 = {pEmp, iEmp}; // ERROR: eBill is not an Employee
     }
 }
